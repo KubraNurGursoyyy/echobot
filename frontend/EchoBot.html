@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>EchoBot</title>
+    <p>EchoBot</p>
+</head>
+<body>
+<div class="container">
+    <div class="history">
+        <h2>History</h2>
+        <p class="me">History</p>
+        <p class="bot">History</p>
+        <p class="me">History</p>
+        <p class="bot">History</p>
+        <p class="me">History</p>
+        <p class="bot">History</p>
+        <p class="me">History</p>
+        <p class="bot">History</p>
+
+    </div>
+    <div class="message">
+        <input type="text" placeholder="Write Something!">
+        <input type="button">
+    </div>
+
+</div>
+</body>
+</html>
+<style>
+    h1{
+        text-align: center;
+    }
+    .container {
+        margin: auto;
+        width: 80%;
+        border: 3px solid rebeccapurple;
+        padding: 10px;
+        border-radius: 41px;
+    }
+    .message {
+        padding: 10px;
+        display: flex;
+    }
+    .history{
+        margin: auto;
+        border: 1px solid rebeccapurple;
+        padding: 20px;
+        border-radius: 10px;
+        width: 90%;
+        font-size: large;
+        text-align: center;
+    }
+    .me{
+        text-align: right;
+    }
+    .bot{
+        text-align: left;
+    }
+    input[type="text"] {
+        width: 90%;
+        padding: 10px;
+        border-radius: 15px;
+        font-size: large;
+    }
+    input[type="button"] {
+        border-radius: 15px;
+        width: 10%;
+        padding: 20px;
+        background-image: url("./icons/send.png");
+        background-size: 25px;
+        background-position-x: 17px;
+        background-position-y: center;
+        background-repeat: no-repeat;
+        background-color: mediumpurple;
+    }
+</style>
