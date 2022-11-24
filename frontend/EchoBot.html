@@ -1,40 +1,54 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EchoBot</title>
-    <a href="Echo.js"></a>
-    <p>EchoBot</p>
 </head>
 <body>
 <div class="container">
+    <h1>History</h1>
     <div class="history">
-        <h2>History</h2>
-        <table>
+        <table id ="history">
 
         </table>
-        <p class="me">History</p>
-        <p class="bot">History</p>
-        <p class="me">History</p>
-        <p class="bot">History</p>
-        <p class="me">History</p>
-        <p class="bot">History</p>
-        <p class="me">History</p>
-        <p class="bot">History</p>
-
     </div>
     <div class="message">
-        <input type="text" placeholder="Write Something!">
-        <input type="button" value="send">
+        <input type="text" id="text" placeholder="Write Something!">
+        <input type="button" id="send" onclick="getEchoFromApi()" >
     </div>
 
 </div>
 </body>
-</html>
+<script type="text/javascript">
 
-<script>
+    function getEchoFromApi() {
+        const text = document.getElementById("text").value;
+
+        var jsonObj = '{"text" : "'+ text+'"}';
+        console.log("data: "+ jsonObj)
+
+        var datatext = $.parseJSON(jsonObj);
+        console.log("data: "+ datatext)
+        $.ajax({
+            type:"POST",
+            url: "http://localhost:8080/api/echo/send",
+            data: datatext,
+            dataType: "JSON"
+        }).then(function(response) {
+            console.log("succes:" + response)
+            document.getElementById("history").insertRow(-1).innerHTML = '<tr><p class="me">' + text + '</p></tr>';
+            document.getElementById("history").insertRow(-1).innerHTML = '<tr><p class="bot"> ' + response.data.echoingText + '</p></tr>';
+        })
+    }
+
+
 
 </script>
+
+</html>
 
 <style>
     h1{
@@ -46,25 +60,60 @@
         border: 3px solid rebeccapurple;
         padding: 10px;
         border-radius: 41px;
+
     }
     .message {
         padding: 10px;
         display: flex;
     }
-    .history{
+    .history {
         margin: auto;
         border: 1px solid rebeccapurple;
         padding: 20px;
         border-radius: 10px;
+        margin-bottom: 30px;
         width: 90%;
         font-size: large;
         text-align: center;
+        overflow: scroll;
+        height: 300px;
+        background: rgb(153, 51, 128,0.2);
+    }
+    #history{
+        margin: auto;
+        padding: 20px;
+        margin-bottom: 30px;
+        width: 90%;
+        font-size: large;
+        text-align: center;
+        position: marker;
+        overflow: scroll;
+        height: 300px;
     }
     .me{
+        float: right;
         text-align: right;
+        background-color: palevioletred;
+        width: 40%;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        padding-right: 10px;
+        border-radius: 5px;
+        overflow: scroll;
+        border: 0.5px solid;
     }
     .bot{
         text-align: left;
+
+        float: left;
+        background-color: palevioletred;
+        width: 40%;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        padding-right: 10px;
+        border-radius: 5px;
+        overflow: scroll;
+        border: 0.5px solid;
     }
     input[type="text"] {
         width: 90%;
@@ -73,8 +122,9 @@
         font-size: large;
     }
     input[type="button"] {
+        margin-left: 10px;
         border-radius: 15px;
-        width: 10%;
+        width: 60px;
         padding: 20px;
         background-image: url("./icons/send.png");
         background-size: 25px;
@@ -83,4 +133,6 @@
         background-repeat: no-repeat;
         background-color: mediumpurple;
     }
+
+
 </style>
